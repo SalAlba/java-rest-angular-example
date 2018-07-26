@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+	<title>JAX-RS</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<style>
+		input:hover {
+			border: none;
+			border-bottom: 2px solid green;
+		}
+
+		input {
+			border: none;
+			border-bottom: 2px solid gray;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1>JAX-RS / Library CRUD App. <small>Run this using WildFly 9</small> </h1>
+
+		<div ng-controller="controllerFunction as ctrl">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Type</th>
+						<th>Created</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr ng-repeat="item in products">
+						<td>{{item.id}}</td>
+						<td>{{item.name}}</td>
+						<td>{{item.type}}</td>
+						<td>{{item.crated}}</td>
+						<td>
+							<button ng-click="startEdit(item)" class="btn btn-xs btn-primary">
+		                    edit
+		                </button>
+							<button ng-click="deleteProduct(item)" class="btn btn-xs btn-danger">
+							delete
+						</button>
+						</td>
+					</tr>
+					<tr ng-class="{danger: editedProduct}">
+						<td><input ng-model="editedProduct.id" required disabled/></td>
+						<td><input ng-model="editedProduct.name" required /></td>
+						<td><input ng-model="editedProduct.type" required /></td>
+						<td><input ng-model="editedProduct.crated" required disabled /></td>
+						<td>
+							<button ng-hide="editedProduct.id" ng-click="createProduct(editedProduct)" class="btn btn-xs btn-success">
+		                    Utwórz
+		                </button>
+							<button ng-show="editedProduct.id" ng-click="updateProduct(editedProduct)" class="btn btn-xs btn-success">
+		                    Zapisz
+		                </button>
+							<button ng-show="editedProduct" ng-click="cancelEdit()" class="btn btn-xs btn-warning">
+		                    Anuluj
+		                </button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+
+	<script src="js/angular.min.js"></script>
+	<script src="js/angular-route.js"></script>
+	<script src="js/angular-resource.js"></script>
+	<script src="js/main.js"></script>
+	<script type="text/javascript">
+		// ...
+	</script>
+</body>
+
+</html>
